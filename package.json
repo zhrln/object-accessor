@@ -1,0 +1,20 @@
+{
+  "name": "object-accessor",
+  "version": "1.0.0",
+  "description": "object-accessor",
+  "main": "index.js",
+  "scripts": {
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhrln/object-accessor.git"
+  },
+  "keywords": [],
+  "author": "zhrln",
+  "license": "Mozilla Public License Version 2.0",
+  "bugs": {
+    "url": "https://github.com/zhrln/object-accessor/issues"
+  },
+  "homepage": "https://github.com/zhrln/object-accessor#readme"
+}
