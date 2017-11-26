@@ -4,7 +4,7 @@
   "description": "object-accessor",
   "main": "index.js",
   "scripts": {
-
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/zhrln/object-accessor/issues"
   },
-  "homepage": "https://github.com/zhrln/object-accessor#readme"
+  "homepage": "https://github.com/zhrln/object-accessor#readme",
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  }
 }

@@ -1,21 +1,40 @@
+/**
+ * Author RuiZhang @zhrln
+ */
+
+const assert = require('assert');
+
 const obj = {
     foo: {
         bar: {
-            key: 'value'
-        }
+            key: "value"
+        },
+        barArr: [
+            "arrayValue"
+        ]
     }
 };
+
 const ObjectAccessor = require('../index');
 const oa = ObjectAccessor(obj);
 
-const barValue = oa.get('foo.bar.key');
-console.log(barValue); // => "value"
+it('foo.bar.key === "value"', () => {
+    const barValue = oa.get('foo.bar.key');
+    assert(barValue === "value", `barValue: ${barValue}`);
+});
 
-const bar1Value = oa.get('foo.bar1.key');
-console.log(bar1Value); // => undefined;
+it('foo.bar1.key === undefined', () => {
+    const bar1Value = oa.get('foo.bar1.key');
+    assert(bar1Value === undefined, `bar1Value: ${bar1Value}`);
+});
 
-oa.set('foo1.bar.key', 'value1');
-const foo1Value = oa.get('foo1.bar.key');
-console.log(foo1Value); // => "value1"
+it('foo.barArr.0 === "arrayValue"', () => {
+    const barArr = oa.get('foo.barArr.0');
+    assert(barArr === 'arrayValue', `barArr: ${barArr}`);
+});
 
-console.log('origin obj: ', JSON.stringify(obj));
+it('set foo1.bar.key = value1', () => {
+    oa.set('foo1.bar.key', 'value1');
+    const foo1Value = oa.get('foo1.bar.key');
+    assert(foo1Value === 'value1', `foo1Value: ${foo1Value}`);
+});
