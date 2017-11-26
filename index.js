@@ -2,27 +2,43 @@
  * Author RuiZhang @zhrln
  */
 
-function parseObj(obj, path = ''){
+function pathToArray(path = ''){
 
     if(typeof path !== 'string'){
-        throw new Error('path must be a string.');
+        if(!isNaN(path)){
+            path = path.toString();
+        }else if(Array.isArray(path)){
+            return path;
+        }else{
+            throw new Error('path must be a string.');
+        }
+    }else{
+        path = path.trim();
     }
 
-    if(typeof obj === 'undefined' || typeof obj !== 'object'){
+    if(path === ''){ return [] }
+
+    return path.indexOf('.') === -1 ? [path] : path.split('.');
+}
+
+function parseObj(obj, path){
+
+    if(typeof obj === 'undefined' || typeof obj !== 'object' || path.length === 0){
         return obj;
     }
 
-    const pathArr = path.split('.');
-
-    return parseObj(obj[pathArr.shift()], pathArr.join('.'));
+    return parseObj(obj[path.shift()], path);
 
 }
 
 function updateObject(obj, path, value){
-
+    // todo 待完成
 }
 
-module.exports = obj => ({
-    get: path => parseObj(obj, path),
-    set: (path, value) => updateObject(obj, path, value)
+const ObjectAccessor = obj => ({
+    get: path => parseObj(obj, pathToArray(path)),
+    set: (path, value) => updateObject(obj, pathToArray(path), value)
 });
+
+module.exports = ObjectAccessor;
+
