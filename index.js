@@ -18,6 +18,8 @@ function pathToArray(path = ''){
 
     if(path === ''){ return [] }
 
+    // todo 增加数组解析逻辑, xxx[0].xxx => xxx.0.xxx
+
     return path.indexOf('.') === -1 ? [path] : path.split('.');
 }
 
@@ -36,8 +38,14 @@ function updateObject(obj, path, value){
 }
 
 const ObjectAccessor = obj => ({
-    get: path => parseObj(obj, pathToArray(path)),
-    set: (path, value) => updateObject(obj, pathToArray(path), value)
+    get(path){
+        // todo try 直接获取
+        return parseObj(obj, pathToArray(path));
+    },
+    set(path, value){
+        // todo try 直接存储
+        return updateObject(obj, pathToArray(path), value);
+    }
 });
 
 module.exports = ObjectAccessor;
