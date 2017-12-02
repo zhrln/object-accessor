@@ -5,20 +5,16 @@
 /**
  * 字符串路径转为数组
  * @param path
- * @returns {Array}
+ * @returns {*}
  */
 function pathToArray(path = ''){
 
-    if(typeof path !== 'string'){
-        if(!isNaN(path)){
-            path = path.toString();
-        }else if(Array.isArray(path)){
-            return path;
-        }else{
-            throw new Error('path must be a string.');
-        }
-    }else{
+    if(Array.isArray(path)){
+        return path;
+    }else if(typeof path === 'string'){
         path = path.trim();
+    }else{
+        throw new Error('path must be a string.');
     }
 
     if(path === ''){ return [] }
@@ -53,12 +49,6 @@ function parseObj(obj, path){
  */
 function updateObject(obj, path, value){
 
-    const typeofObj = typeof obj;
-
-    if(typeofObj === 'undefined' || typeofObj !== 'object'){
-        return obj;
-    }
-
     const subPath = path.shift();
 
     if(path.length === 0){
@@ -91,7 +81,12 @@ function writeValue(obj, path, value){
     return new Function("obj", "value", `return obj.${path} = value;`)(obj, value);
 }
 
-function ObjectAccessor(obj){
+function ObjectAccessor(obj, path, value){
+
+    if(typeof path === 'string' && path.indexOf('.'))
+
+    const argsLength = arguments.length;
+
     return {
         get(path){
             let ret;
