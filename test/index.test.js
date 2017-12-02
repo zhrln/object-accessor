@@ -14,6 +14,7 @@ const obj = {
         ]
     }
 };
+const originObj = JSON.stringify(obj);
 
 const ObjectAccessor = require('../index');
 const oa = ObjectAccessor(obj);
@@ -33,8 +34,19 @@ it('foo.barArr.0 === "arrayValue"', () => {
     assert(barArr === 'arrayValue', `barArr: ${barArr}`);
 });
 
+it('set foo.bar.key = value1', () => {
+    oa.set('foo.bar.key', 'value1');
+    const fooValue = oa.get('foo.bar.key');
+    assert(fooValue === 'value1', `foo1Value: ${fooValue}`);
+});
+
 it('set foo1.bar.key = value1', () => {
     oa.set('foo1.bar.key', 'value1');
     const foo1Value = oa.get('foo1.bar.key');
     assert(foo1Value === 'value1', `foo1Value: ${foo1Value}`);
+});
+
+it('newObj !== originObj', () => {
+    const newObj = JSON.stringify(obj);
+    assert(newObj !== originObj, `newObj: ${newObj}`);
 });
