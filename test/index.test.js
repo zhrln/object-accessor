@@ -24,6 +24,16 @@ it('foo.bar.key === "value"', () => {
     assert(barValue === "value", `barValue: ${barValue}`);
 });
 
+it('foo.bar.key.childKey === undefined', () => {
+    const value = oa.get('foo.bar.key.childKey');
+    assert(value === undefined, `value: ${value}`);
+});
+
+it('foo.bar.key.childKey.childKey === undefined', () => {
+    const value = oa.get('foo.bar.key.childKey.childKey');
+    assert(value === undefined, `value: ${value}`);
+});
+
 it('foo.bar1.key === undefined', () => {
     const bar1Value = oa.get('foo.bar1.key');
     assert(bar1Value === undefined, `bar1Value: ${bar1Value}`);
